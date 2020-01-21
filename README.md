@@ -1,6 +1,6 @@
 Tracker Project
 =================
-
+[![CircleCI](https://circleci.com/gh/canadiyaman/tracker.svg?style=svg)](https://circleci.com/gh/canadiyaman/tracker)
 ![Badge](https://img.shields.io/badge/python-2.7-green.svg)
 ![Badge](https://img.shields.io/badge/django-1.11.27-green.svg)
 ![Badge](https://img.shields.io/badge/postgresql-9.6-blue.svg)
