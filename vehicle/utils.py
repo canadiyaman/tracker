@@ -12,5 +12,7 @@ __all__ = ['get_last_points']
 
 
 def get_last_points():
-    queryset = NavigationRecord.objects.filter(datetime__gte=timezone.now() - timedelta(hours=48))
+    queryset = NavigationRecord.objects \
+        .filter(datetime__gte=timezone.now() - timedelta(hours=48)) \
+        .select_related('vehicle')
     return NavigationRecordSerializer(queryset).data
