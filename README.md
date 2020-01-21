@@ -2,7 +2,7 @@ Tracker Project
 =================
 
 ![Badge](https://img.shields.io/badge/python-2.7-green.svg)
-![Badge](https://img.shields.io/badge/django-1.11-green.svg)
+![Badge](https://img.shields.io/badge/django-1.11.27-green.svg)
 ![Badge](https://img.shields.io/badge/postgresql-9.6-blue.svg)
 
 Installation
