@@ -1,0 +1,42 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/project
+    docker:
+      - image: circleci/python:2.7
+        environment:
+          DJANGO_ENV: circleci
+          DATABASE_URL: postgresql://root@localhost/circle_test?sslmode=disable
+      - image: circleci/postgres:9.6
+        environment:
+          POSTGRES_USER: root
+          POSTGRES_DB: circle_test
+    steps:
+      - checkout
+      - run: sudo chown -R circleci:circleci /usr/local/bin
+      - run: sudo chown -R circleci:circleci /usr/local/lib/python2.7/site-packages
+      - run: sudo apt-get update
+      - restore_cache:
+          key: tracker-{{ .Branch }}-{{ checksum "requirements.txt" }}
+      - run:
+          name: Install requirements
+          command: |
+            mkdir -p ./venv
+            virtualenv ./venv
+            . venv/bin/activate
+            pip install -r requirements.txt
+      - save_cache:
+          key: tracker-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          paths:
+            - "venv"
+            - "/usr/local/bin"
+            - "/usr/local/lib/python2./site-packages"
+      - run:
+          name: Unit Test Cases
+          command: |
+            . venv/bin/activate
+            python manage.py test
+
+      - store_artifacts:
+          path: test-reports
+          destination: test-reports
